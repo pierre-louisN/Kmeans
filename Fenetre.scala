@@ -1,19 +1,25 @@
+import java.awt.event.KeyListener
 import java.awt.{BorderLayout, Dimension, FlowLayout, GridLayout}
 import java.io.FileNotFoundException
 import java.util.Scanner
+
 import javax.swing.{JButton, JFrame, JLabel, JPanel, JScrollPane, JTextArea, JTextField, SwingConstants}
 import javax.swing.WindowConstants.EXIT_ON_CLOSE
 
-class Fenetre extends App {
+class Fenetre extends App{
 
   def start: Unit ={
-    println("Entrer le nom du fichier :")
+    println("Entrer le nom du fichier ou tapez espace ou Entrée pour la valeur par défaut(iris.data) :")
     val s = new Scanner(System.in)
-    val fileName:String = s.nextLine() // le nom du fichier peut être src/fileName ou autre
+    var fileName:String = s.nextLine() // le nom du fichier peut être src/fileName ou autre
+    if (fileName.matches("")){
+      fileName = "iris.data"
+      println("la valeur par défaut (iris.data) a été entregistrée")
+    }
     println("Entrer le nombre de clusters désiré :")
     var k = s.nextInt()
-    while (k>getLineNumber(fileName)){ // pas possible d'avoir plus de clusters que de données
-      println("Entrer le nombre de clusters désiré :")
+    while (k>getLineNumber(fileName) || k==0){ // pas possible d'avoir plus de clusters que de données ni 0 clusters
+      println("Saisi invalide, Entrer le nombre de clusters désiré (doit être positif et différent de 0) :")
       k = s.nextInt()
     }
     init(fileName,k)
