@@ -24,8 +24,12 @@ class Fenetre extends App {
     else {
       var f:File = new File(fileName)
       while(!f.exists()){
-        println("Saisie invalide le fichier n'existe pas ou le nom est incorrect, réésayez :")
+        println("Saisie invalide le fichier n'existe pas ou le nom est incorrect, réésayez ou tapez 'entrée' pour  la valeur par défaut:")
         fileName = s.nextLine() // le nom du fichier peut être src/fileName ou autre
+        if (fileName.matches("")){
+          fileName = "iris.data"
+          println("la valeur par défaut (iris.data) a été entregistrée")
+        }
         f = new File(fileName)
       }
     }
