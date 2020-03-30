@@ -28,3 +28,4 @@ Pour tester l'algo avec un autre fichier, il faut le créer en respectant certai
 Si ces conditions sont respectés, l'algo devrait marcher correctement 
 Pour rentrer le chemin du fichier il est parfois nécessaire de rajouter "src/" devant ou autre extention 
 cela dépend de l'IDE 
+(Vérifier la capture du rendu final pour confirmer que le rendu obtenu est bien le bon)
