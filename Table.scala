@@ -1,6 +1,7 @@
+import java.util.LinkedHashSet
+import javax.swing.JTable
 import java.util.HashSet
 
-import javax.swing.JTable
 class Table(private val km: Kmeans, private val title:String){
 
   def init: JTable ={
@@ -20,9 +21,10 @@ class Table(private val km: Kmeans, private val title:String){
 
   def createColumns(): Array[Object] ={
     val colonnes:HashSet[String] = km.getMatrice.getClasses
-    val prem:HashSet[String] = new HashSet[String]()
-    prem.add("Numéro de cluster") //la premiere colonne est le numéro
-    prem.addAll(colonnes) // on les concatene
-    return prem.toArray()
+    var tree:LinkedHashSet[String] = new LinkedHashSet[String]()
+    tree.add("Cluster n°")
+    tree.add("Type du cluster")
+    tree.addAll(colonnes)
+    return tree.toArray()
     }
 }

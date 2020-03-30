@@ -70,15 +70,17 @@ class Kmeans(private val mat:Matrice, private val k:Int, private var clusters:Ar
 
 
   def tauxClasses(num:Int): Array[String]={ // calcul le taux de chaque classe pour le cluster en paramètre
-    val taille:Int = this.getMatrice.getClasses.toArray().length+1
+    val taille:Int = this.getMatrice.getClasses.toArray().length+2
     val classes = this.getMatrice.getClasses.toArray()
     val tab:Array[Int] = Array.ofDim[Int](taille)
     val tab1:Array[String] = Array.ofDim[String](taille)
     tab1(0) = Integer.toString(num) // la premiere valeur est le numéro du cluster
-    for(i<-1 until taille){ //pour chaque classe
+    //tab1(1) =  "cluster "+num//
+    tab1(1) =  this.mat.getClassement(this.mat.getIndice(this.clusters(num).getCentroide))
+      for(i<-2 until taille){ //pour chaque classe
       for(y<-0 until this.getMatrice.getDonnéesTaille){ // pour chaque données
         if(this.getMatrice.getDonnée(y).getValeur(4)==num){ // si la donnée fait bien parti du cluster en paramètre
-          if(this.getMatrice.getClassement(y)==classes(i-1)){ // si la données a pour classe la classe courante
+          if(this.getMatrice.getClassement(y)==classes(i-2)){ // si la données a pour classe la classe courante
             tab(i) = tab(i)+1
           }
         }

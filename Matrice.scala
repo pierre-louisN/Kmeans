@@ -91,4 +91,16 @@ class Matrice(private val fileName:String){
     return this.données
   }
 
+  def getIndice(d:Données): Int={
+    var trouve:Boolean = false
+    var i:Int = 0
+    while(i<this.données.length-1 && trouve==false){
+      if(this.données(i).equals(d)){
+        trouve = true
+      }
+      i = i+1
+    }
+    return i
+  }
+
 }

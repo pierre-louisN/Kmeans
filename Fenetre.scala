@@ -2,11 +2,16 @@ import java.awt.event.KeyListener
 import java.awt.{BorderLayout, Dimension, FlowLayout, GridLayout}
 import java.io.FileNotFoundException
 import java.util.Scanner
+import javax.swing.border._
+import javax.swing._
+
+
+import java.io._
 
 import javax.swing.{JButton, JFrame, JLabel, JPanel, JScrollPane, JTextArea, JTextField, SwingConstants}
 import javax.swing.WindowConstants.EXIT_ON_CLOSE
 
-class Fenetre extends App{
+class Fenetre extends App {
 
   def start: Unit ={
     println("Entrer le nom du fichier ou tapez espace ou Entrée pour la valeur par défaut(iris.data) :")
@@ -15,6 +20,14 @@ class Fenetre extends App{
     if (fileName.matches("")){
       fileName = "iris.data"
       println("la valeur par défaut (iris.data) a été entregistrée")
+    }
+    else {
+      var f:File = new File(fileName)
+      while(!f.exists()){
+        println("Saisie invalide le fichier n'existe pas ou le nom est incorrect, réésayez :")
+        fileName = s.nextLine() // le nom du fichier peut être src/fileName ou autre
+        f = new File(fileName)
+      }
     }
     println("Entrer le nombre de clusters désiré :")
     var k = s.nextInt()
@@ -57,7 +70,8 @@ class Fenetre extends App{
     val table:Table = new Table(km,"Tableau des taux de points par classes pour chaque cluster" )
     val panel:JPanel = new JPanel();
     val tableContainer:JScrollPane = new JScrollPane(table.init);
-    panel.add(tableContainer, BorderLayout.CENTER);
+    panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Tableau de répartition des clusters", TitledBorder.CENTER, TitledBorder.TOP))
+    panel.add(tableContainer)
     frame.add(panel);
     frame.setVisible(true)
   }
